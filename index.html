@@ -13,6 +13,7 @@
             <button id="textToolButton" class="active">連投ツール</button>
             <button id="numberToolButton">数字連投ツール</button>
             <button id="unicodeToolButton">Unicode連投ツール</button>
+            <button id="emojiToolButton">絵文字連投ツール</button>
         </div>
     </div>
     
@@ -55,6 +56,39 @@
         <div class="container">
             <label for="unicodeLength">文字数:</label>
             <input type="number" id="unicodeLength" min="1" value="5" placeholder="Unicode文字の文字数を指定してください">
+        </div>
+    </div>
+    
+    <!-- 絵文字連投ツール -->
+    <div id="emojiTool" class="tool hidden">
+        <h2>絵文字連投ツール</h2>
+        <div class="container">
+            <label for="emojiCount">絵文字の数:</label>
+            <input type="number" id="emojiCount" min="1" value="5" placeholder="絵文字数を指定してください">
+        </div>
+        <div class="container">
+            <label for="emoji">絵文字を選択:</label>
+            <select id="emoji">
+                <option value="🟥">🟥</option>
+                <option value="🟧">🟧</option>
+                <option value="🟨">🟨</option>
+                <option value="🟩">🟩</option>
+                <option value="🟦">🟦</option>
+                <option value="🟪">🟪</option>
+                <option value="🟫">🟫</option>
+                <option value="⬛">⬛</option>
+                <option value="⬜">⬜</option>
+                <option value="🔴">🔴</option>
+                <option value="🟠">🟠</option>
+                <option value="🟡">🟡</option>
+                <option value="🟢">🟢</option>
+                <option value="🔵">🔵</option>
+                <option value="🟣">🟣</option>
+                <option value="⚫">⚫</option>
+                <option value="⚪">⚪</option>
+                <option value="🟤">🟤</option>
+                <option value="random">ランダム</option> <!-- ランダムオプションを追加 -->
+            </select>
         </div>
     </div>
     
