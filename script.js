@@ -7,7 +7,7 @@ function switchTool(tool) {
     document.getElementById(tool).classList.remove('hidden');
 
     document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`${tool}Button`).classList.add('active');
+    document.getElementById(tool + 'Button').classList.add('active');
 }
 
 // ランダムな数字を生成
@@ -18,6 +18,12 @@ function generateRandomNumber(length) {
 // ランダムなUnicode文字列を生成
 function generateRandomUnicode(length) {
     return Array.from({ length }, () => String.fromCharCode(Math.floor(Math.random() * (0xD7FF - 0x0020) + 0x0020))).join('');
+}
+
+// ランダムな絵文字を生成
+function generateRandomEmoji(length) {
+    const emojis = ["🟥", "🟧", "🟨", "🟩", "🟦", "🟪", "🟫", "⬛", "⬜", "🔴", "🟠", "🟡", "🟢", "🔵", "🟣", "⚫", "⚪", "🟤"];
+    return Array.from({ length }, () => emojis[Math.floor(Math.random() * emojis.length)]).join('');
 }
 
 // メッセージを生成
@@ -40,7 +46,7 @@ function generateDynamicMessage() {
             const randomTag = format === 'binary'
                 ? '#' + Array.from({ length: 5 }, () => Math.floor(Math.random() * 2)).join('')
                 : '#' + Array.from({ length: 5 }, () => '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('');
-
+            
             dynamicMessage += '\n'.repeat(lines) + randomTag;
         }
 
@@ -51,6 +57,15 @@ function generateDynamicMessage() {
     } else if (activeTool === 'unicodeTool') {
         const unicodeLength = parseInt(document.getElementById('unicodeLength').value) || 5;
         return encodeURIComponent(generateRandomUnicode(unicodeLength));
+    } else if (activeTool === 'emojiTool') {
+        const emojiCount = parseInt(document.getElementById('emojiCount').value) || 5;
+        const selectedEmoji = document.getElementById('emoji').value;
+
+        if (selectedEmoji === "random") {
+            return encodeURIComponent(generateRandomEmoji(emojiCount));
+        } else {
+            return encodeURIComponent(Array.from({ length: emojiCount }, () => selectedEmoji).join(''));
+        }
     }
     return '';
 }
@@ -118,6 +133,7 @@ document.getElementById('stopButton').addEventListener('click', stopSharing);
 document.getElementById('textToolButton').addEventListener('click', () => switchTool('textTool'));
 document.getElementById('numberToolButton').addEventListener('click', () => switchTool('numberTool'));
 document.getElementById('unicodeToolButton').addEventListener('click', () => switchTool('unicodeTool'));
+document.getElementById('emojiToolButton').addEventListener('click', () => switchTool('emojiTool'));
 
 // 初期ツール設定
 switchTool('textTool');
